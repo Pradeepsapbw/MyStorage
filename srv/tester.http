@@ -1,0 +1,79 @@
+###Get the service document
+http://localhost:4004/odata/v4/CatalogService/
+
+###Get service metadata document
+http://localhost:4004/odata/v4/CatalogService/$metadata
+
+###Get All employees data
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+
+###Get Single Employee Data
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C19967FB
+
+###Get All employees data - Pagination - loading data chunk by chunk
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$top=10&$skip=10
+
+###Get data based on filter
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=sex eq 'M'
+
+###Count of records
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/$count
+ 
+###Selection of few columns
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$select=ID,nameFirst,sex
+
+###Insert Employee data
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+      "nameFirst": "Pradeepkumar",
+      "nameMiddle": "",
+      "nameLast": "Deva",
+      "nameInitials": null,
+      "sex": "M",
+      "language": "E",
+      "phoneNumber": null,
+      "email": "pradeepkumar.sapbw@gmail.com",
+      "loginName": "DEVA",
+      "Currency_code": "USD",
+      "salaryAmount": 9000000,
+      "accountNumber": "8448454549",
+      "bankId": "121000358",
+      "bankName": "My Bank of San Francisco"
+}
+
+###Get the newly created employee
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/0a81522d-4b9f-40be-9541-641fb21920d7
+
+ 
+###Update employee data
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/0a81522d-4b9f-40be-9541-641fb21920d7
+Content-Type: application/json
+ 
+{
+    "salaryAmount": 10000,
+    "Currency_code": "EUR"
+}
+ 
+ 
+###Delete the employee
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/0a81522d-4b9f-40be-9541-641fb21920d7
+
+###Get all Purchase Orders
+http://localhost:4004/odata/v4/CatalogService/POs
+
+###Get Single Purchase order
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052
+
+###Get the PO and PO Items data together - using $expand
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC38052?$expand=Items
+
+###Testing Action to boost order
+POST http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC38052')/CatalogService.boost
+Content-Type: application/json
+ 
+{}
+ 
+###Test function to get largest order
+http://localhost:4004/odata/v4/CatalogService/largestOrder()
